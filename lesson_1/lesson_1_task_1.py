@@ -1,2 +1,2 @@
-my_mane="Кирилл"
-print(my_mane)
+my_name="Кирилл"
+print(my_name)
