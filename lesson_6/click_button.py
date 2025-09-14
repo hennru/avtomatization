@@ -3,25 +3,24 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Инициализация драйвера
+# Запуск браузера
 driver = webdriver.Chrome()
+driver.get("http://uitestingplayground.com/ajax")
 
-try:
-    # Открытие страницы
-    driver.get("http://uitestingplayground.com/ajax")
-    
-    # Находим и нажимаем кнопку
-    button = driver.find_element(By.CSS_SELECTOR, "button.btn-primary")
-    button.click()
-    
-    # Добавляем явное ожидание появления сообщения
-    wait = WebDriverWait(driver, 20)
-    message = wait.until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, ".alert-success"))
+# Нажатие на кнопку
+driver.find_element(By.CLASS_NAME, "btn-primary").click()
+
+# Ожидание появления нужного текста
+wait = WebDriverWait(driver, 40)  
+text_elem = wait.until(
+    EC.text_to_be_present_in_element(
+        (By.CLASS_NAME, "bg-success"),
+        "Data loaded with AJAX get request"
     )
-    
-    # Выводим текст сообщения
-    print(message.text)  # Вывод: Data loaded with AJAX get request.
-    
-finally:
-    driver.quit()
+)
+
+# Повторно ищем элемент, чтобы получить текст
+text_element = driver.find_element(By.CLASS_NAME, "bg-success")
+print(text_element.text)
+
+driver.quit()
