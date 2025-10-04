@@ -8,7 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_shop_checkout():
-    driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+    driver = webdriver.Firefox(
+        service=FirefoxService(GeckoDriverManager().install()))
     driver.get("https://www.saucedemo.com/")
     wait = WebDriverWait(driver, 10)
 
