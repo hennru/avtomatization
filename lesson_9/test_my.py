@@ -1,16 +1,16 @@
 from sqlalchemy import create_engine, text
 
-# Замените на свои данные
-username = 'dbviv'
-password = ''
+# Подключение к MySQL
+username = 'root'
+password = 's9l6gz5amu'
 host = 'localhost'
-port = '5432'
-database = 'QA'
+port = '3306'
+database = 'AQA'
 
-engine = create_engine(f'postgresql://{username}:{password}@{host}:{port}/{database}')
+db_connection_string = "mysql+pymysql://root:s9l6gz5amu@localhost:3306/AQA"
+engine = create_engine(db_connection_string)
 
-# Пример использования
 with engine.connect() as connection:
-    result = connection.execute(text("SELECT * FROM company"))
-    rows = result.mappings().all()
+    result= connection.execute(text("SELECT * FROM company"))
+    rows= result.mappings().all()
     print(rows)
